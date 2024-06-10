@@ -1,21 +1,18 @@
-// swift-tools-version:5.3
+// swift-tools-version: 5.6
 import PackageDescription
 
 let package = Package(
-    name: "cryptoKMPKit",
-    platforms: [
-        .iOS(.v16)
-    ],
-    products: [
-        .library(
-            name: "cryptoKMPKit",
-            targets: ["cryptoKMPKit"]
-        ),
-    ],
-    targets: [
-        .binaryTarget(
-            name: "cryptoKMPKit",
-            path: "./cryptoKMPKit.xcframework"
-        ),
-    ]
+  name: "cryptoKMP",
+  platforms: [.iOS(.v14)],
+  products: [
+    .library(
+      name: "cryptoKMP",
+      targets: ["cryptoKMP"]
+    ),
+  ],
+  dependencies: [],
+  targets: [
+    .binaryTarget(name: "cryptoKMP",
+            path: "./distribution/cryptokmplib.xcframework"),
+  ]
 )
