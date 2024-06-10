@@ -1,10 +1,17 @@
-name: Deploy iOS
-on:
-  workflow_dispatch:
+name: Deploy to central
+on: workflow_dispatch
+
 jobs:
   build:
     uses: ./.github/workflows/gradle.yml
-    runs-on: ubuntu-latest
+  deploy:
+    needs: build
+    strategy:
+      matrix:
+        include:
+          - target: publishIosArm64PublicationToSonatypeRepository
+            os: macos-latest
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
     - name: Validate Gradle Wrapper
@@ -24,13 +31,3 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: Gradle publish
-      uses: gradle/gradle-build-action@ce999babab2de1c4b649dc15f0ee67e6246c994f
-      with:
-        arguments: |
-          ${{ matrix.target }}
-          closeSonatypeStagingRepository
-          -Psigning.gnupg.passphrase='${{secrets.OSSRH_GPG_SECRET_KEY_PASSWORD}}'
-          -Psigning.gnupg.keyName='${{secrets.OSSRH_GPG_SECRET_KEY_ID}}'
-          -PsonatypeUsername='${{secrets.OSSRH_USERNAME}}'
-          -PsonatypePassword='${{secrets.OSSRH_PASSWORD}}'
