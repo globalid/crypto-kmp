@@ -1,17 +1,11 @@
-name: Deploy to central
+name: Deploy iOS
 on: workflow_dispatch
-
 jobs:
   build:
     uses: ./.github/workflows/gradle.yml
   deploy:
     needs: build
-    strategy:
-      matrix:
-        include:
-          - target: publishIosArm64PublicationToSonatypeRepository
-            os: macos-latest
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
     - name: Validate Gradle Wrapper
