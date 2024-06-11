@@ -10,20 +10,27 @@ plugins {
 }
 
 kotlin {
+    applyDefaultHierarchyTemplate()
+
     jvm()
     jvmToolchain(17)
+
     androidTarget {
         publishLibraryVariants("release")
     }
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
 
-    applyDefaultHierarchyTemplate()
+    jvm().compilations.all {
+        compileTaskProvider.configure{
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_17)
+            }
+        }
+    }
+
+    iosArm64()
 
     val xcFramework = XCFramework()
-    val iosTargets = listOf(iosX64(), iosArm64(), iosSimulatorArm64())
-
+    val iosTargets = listOf(iosArm64())
     iosTargets.forEach {
         it.binaries.framework {
             baseName = "cryptokmplib"
@@ -39,13 +46,6 @@ kotlin {
                 compilerOptions {
                     allWarningsAsErrors.set(true)
                 }
-            }
-        }
-    }
-    jvm().compilations.all {
-        compileTaskProvider.configure{
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
             }
         }
     }
@@ -74,9 +74,6 @@ kotlin {
         }
     }
     task("testClasses")
-    task("linuxX64MainBinaries")
-    task("linuxX64TestBinaries")
-    task("linkLinuxX64")
 }
 
 android {
