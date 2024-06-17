@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalForeignApi::class, BetaInteropApi::class)
 
-package encoding
+package net.cryptokmplib.encoding
 
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -10,6 +10,7 @@ import kotlinx.cinterop.usePinned
 import platform.Foundation.NSString
 import platform.Foundation.create
 
+@OptIn(ExperimentalForeignApi::class)
 actual fun constructString(chars: CharArray, offset: Int, length: Int): String {
     val byteArray = ByteArray(length) // convert CharArray to ByteArray
     for (i in 0 until length) {

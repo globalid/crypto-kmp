@@ -1,4 +1,4 @@
-package encoding
+package net.crypotkmplib.encoding
 
 import platform.Foundation.NSData
 

@@ -1,4 +1,4 @@
-package encoding
+package net.cryptokmplib.encoding
 
 private const val ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 private val BASE58 = ALPHABET.toCharArray()

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalForeignApi::class, ExperimentalForeignApi::class, BetaInteropApi::class)
 
-package encoding
+package net.crypotkmplib.encoding
 
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi

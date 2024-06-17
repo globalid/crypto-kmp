@@ -12,7 +12,7 @@ publishing {
         withType<MavenPublication> {
             groupId = "global"
             artifactId = "cryptokmplib"
-            version = "0.0.1" // TODO: Find a way to automate this.
+            version = "0.0.3" // TODO: Find a way to automate this.
 
             pom {
                 name.set("Crypto KMP Lib")
