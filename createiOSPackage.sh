@@ -1,5 +1,4 @@
-checksum=$(sha256sum "cryptokmplib.zip" | awk '{ print $1 }')
-
+checksum=$(shasum --algorithm 256 "cryptokmplib.zip" | awk '{print $1}' )
 # Check if the correct number of arguments is provided
 if [ "$#" -lt 1 ]; then
   echo "Usage: $0 input_file output_file key1=value1 [key2=value2 ...]"
