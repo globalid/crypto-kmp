@@ -44,5 +44,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Generate Package.swift
-      run: |
-      ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }}
+      run: ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }}
