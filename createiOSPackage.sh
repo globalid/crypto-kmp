@@ -1,6 +1,7 @@
+checksum=$(sha256sum "cryptokmplib.zip" | awk '{ print $1 }')
 
 # Check if the correct number of arguments is provided
-if [ "$#" -lt 2 ]; then
+if [ "$#" -lt 1 ]; then
   echo "Usage: $0 input_file output_file key1=value1 [key2=value2 ...]"
   exit 1
 fi
@@ -28,6 +29,9 @@ for kv in "$@"; do
   
   # Use sed to perform the replacement
   sed -i '' "s/$key/$value/g" "$output_file"
+
+   # Use sed to perform the replacement
+  sed -i '' "s/app_checksum/$checksum/g" "$output_file"
 done
 
 echo "Replacement completed. Output written to $output_file"
