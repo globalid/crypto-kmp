@@ -31,14 +31,10 @@ jobs:
       uses: gradle/gradle-build-action@v3
     - name: Build with Gradle
       run: ./gradlew assembleXCFramework
-    - name: Find build folder
-      shell: bash
-      run: |
-       cp -a /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/. /Users/runner/work/crypto-kmp/crypto-kmp/distribution/
-    - name: Commit add and push
-      shell: bash
-      run: |
-        commit_message="XCFramevork commit"
-        git add . -A
-        git commit -m "$commit_message"
-        git push
+    - name: Release with Notes
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
