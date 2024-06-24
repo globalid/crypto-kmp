@@ -3,6 +3,7 @@ name: Deploy iOS
 
 on:
   workflow_dispatch:
+    
 jobs:
   build:
     strategy:
@@ -32,9 +33,9 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleXCFramework
     - name: Release with Notes
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/.
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
