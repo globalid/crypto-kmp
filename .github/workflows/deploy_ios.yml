@@ -36,13 +36,14 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleXCFramework
     - name: Zip framework
-      run: zip '/Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework.zip' '/Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework'
+      run: zip 'cryptokmplib.zip' '/Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework'
     - name: Release to Github
       uses: softprops/action-gh-release@v1
       with:
-        files: /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework.zip
+        files: cryptokmplib.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Generate Package.swift
       run: |
-         ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }} app_checksum=$(sha256sum "/Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework.zip" | awk '{ print $1 }')
+      CHECKSUM_VAL=$(sha256sum "cryptokmplib.zip" | awk '{ print $1 }')
+      ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }} app_checksum=$CHECKSUM_VAL
