@@ -3,7 +3,10 @@ name: Deploy iOS
 
 on:
   workflow_dispatch:
-    
+  push:
+    tags:
+      - "v*.*.*"
+
 jobs:
   build:
     strategy:
@@ -14,9 +17,14 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Validate Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1
+    - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/cache@v3
       with:
         path: |
@@ -29,7 +37,7 @@ jobs:
         distribution: 'temurin'
         cache: gradle
     - name: Setup Gradle
-      uses: gradle/gradle-build-action@v3
+      uses: gradle/setup-gradle@v3
     - name: Build with Gradle
       run: ./gradlew assembleXCFramework
     - name: Release with Notes
@@ -37,5 +45,6 @@ jobs:
       with:
         files: |
           /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/.
+          /Users/runner/work/crypto-kmp/crypto-kmp/Package.swift
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
