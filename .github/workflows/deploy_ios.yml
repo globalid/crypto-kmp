@@ -37,11 +37,6 @@ jobs:
       run: ./gradlew assembleXCFramework
     - name: Zip framework
       uses: zip /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework
-    - name: Generate checksum
-        uses: jmgilman/actions-generate-checksum@v1
-        with:
-          patterns: |
-            /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework.zip
     - name: Release to Github
       uses: softprops/action-gh-release@v1
       with:
