@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - "v*.*.*"
+      - "v*.*.*.*"
 
 jobs:
   build:
@@ -20,11 +20,6 @@ jobs:
     - uses: actions/checkout@v4
     - name: Validate Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1
-    - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/cache@v3
       with:
         path: |
@@ -40,11 +35,19 @@ jobs:
       uses: gradle/setup-gradle@v3
     - name: Build with Gradle
       run: ./gradlew assembleXCFramework
-    - name: Release with Notes
+    - name: Zip framework
+      uses: zip /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework
+    - name: Generate checksum
+        uses: jmgilman/actions-generate-checksum@v1
+        with:
+          patterns: |
+            /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework.zip
+    - name: Release to Github
       uses: softprops/action-gh-release@v1
       with:
-        files: |
-          /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/.
-          /Users/runner/work/crypto-kmp/crypto-kmp/Package.swift
+        files: /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Generate Package.swift
+      run: |
+         ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }} app_checksum=$(sha256sum "/Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework.zip" | awk '{ print $1 }')
