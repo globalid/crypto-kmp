@@ -44,4 +44,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Generate Package.swift
-      run: ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }}
+      run: |
+        ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }}
+        rm -rf cryptokmplib.zip
+    - name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
