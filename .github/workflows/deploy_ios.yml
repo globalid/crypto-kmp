@@ -36,7 +36,7 @@ jobs:
         distribution: 'temurin'
         cache: gradle
     - name: Setup Gradle
-      uses: gradle/gradle-build-action@v3
+      uses: gradle/actions/setup-gradle@v3
     - name: Build with Gradle
       run: ./gradlew assembleXCFramework
     - name: Zip framework
@@ -49,7 +49,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Generate Package.swift
       run: |
-        ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }}
+        ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
         rm -rf cryptokmplib.zip
     - name: Commit & Push changes
       run: |
