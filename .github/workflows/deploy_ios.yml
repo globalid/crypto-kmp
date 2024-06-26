@@ -49,7 +49,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Generate Package.swift
       run: |
-        ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{  github.ref_name }}"
+        echo "tag: "+${{  github.ref_name }}
+        ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{  github.ref_name }}
         rm -rf cryptokmplib.zip
     - name: Commit & Push changes
       run: |
