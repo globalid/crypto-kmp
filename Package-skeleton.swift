@@ -5,7 +5,7 @@ import PackageDescription
 let name = "cryptoKMP"
 let tag = app_tag
 let checksum = app_checksum
-let url = "https://github.com/globalid/crypto-kmp/archive/refs/tags/\(tag).zip"
+let url = "https://github.com/globalid/crypto-kmp/releases/download/\(tag)/cryptokmplib.zip"
 
 
 let package = Package(
