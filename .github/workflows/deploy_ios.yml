@@ -50,6 +50,8 @@ jobs:
         ./createiOSPackage.sh Package-skeleton.swift Package.swift app_tag=${{ steps.vars.outputs.tag }}
         rm -rf cryptokmplib.zip
     - name: Commit & Push changes
-      uses: Andro999b/push@v1.3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config user.name 'globalid-bot'
+        git config user.email 'github-bot[bot]@global.id'
+        git commit -am "Generated Package.swift" || echo "There is nothing to commit"
+        git push
