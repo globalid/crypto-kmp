@@ -51,6 +51,7 @@ jobs:
         rm -rf cryptokmplib.zip
     - name: Commit & Push changes
       run: |
+        git status
         git config user.name 'globalid-bot'
         git config user.email 'github-bot[bot]@global.id'
         git commit -am "Generated Package.swift" || echo "There is nothing to commit"
