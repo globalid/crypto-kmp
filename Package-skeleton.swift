@@ -13,13 +13,14 @@ let package = Package(
   platforms: [.iOS(.v14)],
   products: [
     .library(
-      name: name targets: [name]
+      name: name,
+      targets: [name]
     ),
   ],
   dependencies: [],
   targets: [
    .binaryTarget(name: name,
                  url: url,
-                 checksum: checksum),
+                 checksum: checksum)
   ]
 )
