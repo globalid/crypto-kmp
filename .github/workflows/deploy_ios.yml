@@ -42,7 +42,7 @@ jobs:
     - name: Zip framework
       run: |
        cd /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/
-       zip 'cryptokmplib.zip' 'cryptokmplib.xcframework'
+       zip -r 'cryptokmplib.zip' 'cryptokmplib.xcframework'
        cp cryptokmplib.zip /Users/runner/work/crypto-kmp/crypto-kmp/
     - name: Release to Github
       uses: softprops/action-gh-release@v1
