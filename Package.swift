@@ -3,8 +3,8 @@ import PackageDescription
 
 // Tag is required to point towards the right asset. SPM requires the tag to follow semantic versioning to be able to resolve it.
 let name = "cryptoKMP"
-let tag = "v0.0.1.32"
-let checksum = "87b36aeed5e995c2ed001f880d154e474bdcf2a173bf1236efac112b91a216cf"
+let tag = "v0.0.1.33"
+let checksum = "f597c45efc646a10d3ca4f778e88f2387ffd5154493a165a659b6acd8350ba45"
 let url = "https://github.com/globalid/crypto-kmp/releases/download/\(tag)/cryptokmplib.zip"
 
 
@@ -13,13 +13,14 @@ let package = Package(
   platforms: [.iOS(.v14)],
   products: [
     .library(
-      name: name targets: [name]
+      name: name,
+      targets: [name]
     ),
   ],
   dependencies: [],
   targets: [
    .binaryTarget(name: name,
                  url: url,
-                 checksum: checksum),
+                 checksum: checksum)
   ]
 )
