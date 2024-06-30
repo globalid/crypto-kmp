@@ -40,7 +40,10 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleXCFramework
     - name: Zip framework
-      run: zip 'cryptokmplib.zip' '/Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/cryptokmplib.xcframework'
+      run:|
+       cd /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/
+       zip 'cryptokmplib.zip' 'cryptokmplib.xcframework'
+       cp cryptokmplib.zip /Users/runner/work/crypto-kmp/crypto-kmp/
     - name: Release to Github
       uses: softprops/action-gh-release@v1
       with:
