@@ -40,7 +40,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleXCFramework
     - name: Zip framework
-      run:|
+      run: |
        cd /Users/runner/work/crypto-kmp/crypto-kmp/cryptokmplib/build/XCFrameworks/release/
        zip 'cryptokmplib.zip' 'cryptokmplib.xcframework'
        cp cryptokmplib.zip /Users/runner/work/crypto-kmp/crypto-kmp/
