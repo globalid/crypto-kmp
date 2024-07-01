@@ -1,9 +1,7 @@
 @file:Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
-
-package encoding
+package net.cryptokmplib.encoding
 
 import java.util.Base64
-import java.security.MessageDigest
 
 
 actual object Base64Encoder {

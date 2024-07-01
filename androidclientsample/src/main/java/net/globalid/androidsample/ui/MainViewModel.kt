@@ -1,10 +1,10 @@
 package net.globalid.androidsample.ui
 
-import EncryptionManager
+import net.cryptokmplib.encoding.EncryptionProvider
 import androidx.lifecycle.ViewModel
 
 class MainViewModel(
-    private val encryptionManager: EncryptionManager
+    private val encryptionManager: EncryptionProvider
 ): ViewModel() {
 
 

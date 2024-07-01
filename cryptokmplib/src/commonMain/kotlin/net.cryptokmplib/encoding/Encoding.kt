@@ -1,10 +1,11 @@
 @file:Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 
-package encoding
+package net.cryptokmplib.encoding
 
 enum class Encoding {
     BASE64,
-    Base58,
+    BASE58,
+    NONE,
 }
 
 expect object Base64Encoder {

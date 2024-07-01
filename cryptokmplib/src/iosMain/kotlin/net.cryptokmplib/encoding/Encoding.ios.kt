@@ -1,12 +1,14 @@
 @file:OptIn(ExperimentalForeignApi::class)
 @file:Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 
-package encoding
+package net.cryptokmplib.encoding
 
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.usePinned
+import net.crypotkmplib.encoding.toByteArray
+import net.crypotkmplib.encoding.toNSData
 import platform.Foundation.NSData
 import platform.Foundation.NSString
 import platform.Foundation.NSUTF8StringEncoding

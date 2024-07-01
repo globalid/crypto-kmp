@@ -1,6 +1,7 @@
-import encoding.decodeFromBase58
-import encoding.encodeToBase58
-import encoding.toUtf8ByteArray
+package net.cryptokmplib
+import net.cryptokmplib.encoding.decodeFromBase58
+import net.cryptokmplib.encoding.encodeToBase58
+import net.cryptokmplib.encoding.toUtf8ByteArray
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
