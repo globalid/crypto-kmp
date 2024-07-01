@@ -29,7 +29,7 @@ kotlin {
             baseName = "cryptokmplib"
             xcFramework.add(this)
             binaryOption("bundleId", "net.globalid.cryptokmplib")
-            binaryOption("bundleVersion", "0.0.1")
+            binaryOption("bundleVersion", "1.0.2")
         }
     }
 
@@ -65,6 +65,7 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(libs.junit)
+                implementation(libs.curve25519elisabeth)
             }
         }
         val iosTest by getting {
