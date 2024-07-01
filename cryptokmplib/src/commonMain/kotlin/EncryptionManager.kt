@@ -1,6 +1,7 @@
 import com.ionspin.kotlin.crypto.LibsodiumInitializer
 import com.ionspin.kotlin.crypto.LibsodiumInitializer.isInitialized
 import com.ionspin.kotlin.crypto.signature.Signature
+import com.ionspin.kotlin.crypto.util.encodeToUByteArray
 import encoding.Base64Encoder
 import encoding.Encoding
 import encoding.encodeToBase58
@@ -29,16 +30,29 @@ class EncryptionManager {
         return when(encoding) {
             Encoding.BASE64 -> {
                 KeyPair(
-                    Base64Encoder.encodeToString(publicKeyData.toByteArray()),
-                    Base64Encoder.encodeToString(privateKeyData.toByteArray()),
+                    publicKey = Base64Encoder.encodeToString(publicKeyData.toByteArray()),
+                    privateKey = Base64Encoder.encodeToString(privateKeyData.toByteArray()),
                 )
             }
             Encoding.Base58 -> {
                 KeyPair(
-                    publicKeyData.toByteArray().encodeToBase58(),
-                    privateKeyData.toByteArray().encodeToBase58(),
+                    publicKey = publicKeyData.toByteArray().encodeToBase58(),
+                    privateKey = privateKeyData.toByteArray().encodeToBase58(),
                 )
             }
         }
     }
+
+
+    @OptIn(ExperimentalUnsignedTypes::class)
+    fun convertEd25519toCurve(root: KeyPair): KeyPair {
+        val curvePublic = Signature.ed25519PkToCurve25519(root.publicKey.encodeToUByteArray())
+        val curveSecret = Signature.ed25519SkToCurve25519(root.privateKey.encodeToUByteArray())
+        val converted =  KeyPair(
+            publicKey = curvePublic.toByteArray().encodeToBase58(),
+            privateKey = curveSecret.toByteArray().encodeToBase58()
+        )
+        return converted
+    }
+
 }
