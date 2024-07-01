@@ -29,14 +29,14 @@ class EncryptionManager {
         return when(encoding) {
             Encoding.BASE64 -> {
                 KeyPair(
+                    Base64Encoder.encodeToString(publicKeyData.toByteArray()),
                     Base64Encoder.encodeToString(privateKeyData.toByteArray()),
-                    Base64Encoder.encodeToString(publicKeyData.toByteArray())
                 )
             }
             Encoding.Base58 -> {
                 KeyPair(
+                    publicKeyData.toByteArray().encodeToBase58(),
                     privateKeyData.toByteArray().encodeToBase58(),
-                    publicKeyData.toByteArray().encodeToBase58()
                 )
             }
         }
