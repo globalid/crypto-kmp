@@ -3,8 +3,8 @@ import PackageDescription
 
 // Tag is required to point towards the right asset. SPM requires the tag to follow semantic versioning to be able to resolve it.
 let name = "cryptoKMP"
-let tag = "v0.0.1.33"
-let checksum = "f597c45efc646a10d3ca4f778e88f2387ffd5154493a165a659b6acd8350ba45"
+let tag = "1.0.0"
+let checksum = "015103347383a8232a229420da1aeef84a313143a39029e93a2367568d255959"
 let url = "https://github.com/globalid/crypto-kmp/releases/download/\(tag)/cryptokmplib.zip"
 
 
